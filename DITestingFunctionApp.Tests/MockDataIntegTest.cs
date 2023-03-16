@@ -10,30 +10,43 @@ using DITestingFunctionApp.Tests.Helpers;
 
 namespace DITestingFunctionApp.Tests
 {
-    public class AccountProcessorTest
+    public class IntegrationTests
     {
-        readonly DITestingFunction diTestingFunction;
-
-        public AccountProcessorTest()
+        [Fact]
+        public void IntegTestMockData()
         {
+            // arrange
+            var req = new DefaultHttpRequest(new DefaultHttpContext());
             var testStartup = new IntegTestStartup();
             var host = new HostBuilder()
                 .ConfigureWebJobs(testStartup.Configure)
                 .Build();
-            diTestingFunction = new DITestingFunction(host.Services.GetRequiredService<IAccountProcessor>());
-        }
-
-        [Fact]
-        public void MockData()
-        {
-            // arrange
-            var req = new DefaultHttpRequest(new DefaultHttpContext());
+            var diTestingFunction = new DITestingFunction(host.Services.GetRequiredService<IAccountProcessor>());
 
             // act
             var result = (OkObjectResult)diTestingFunction.Run(req).Result;
 
             // assert
-            Assert.Equal(1365, result.Value);
+            Assert.Equal(1337, result.Value);
+
+        }
+
+        [Fact]
+        public void IntegTestRealData()
+        {
+            // arrange
+            var req = new DefaultHttpRequest(new DefaultHttpContext());
+            var testStartup = new Startup();
+            var host = new HostBuilder()
+                .ConfigureWebJobs(testStartup.Configure)
+                .Build();
+            var diTestingFunction = new DITestingFunction(host.Services.GetRequiredService<IAccountProcessor>());
+
+            // act
+            var result = (OkObjectResult)diTestingFunction.Run(req).Result;
+
+            // assert
+            Assert.Equal(36, result.Value);
 
         }
     }
