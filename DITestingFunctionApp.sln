@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DITestingFunctionApp", "DITestingFunctionApp\DITestingFunctionApp.csproj", "{9183F58F-9DDA-485D-8E74-F82B4D4C3D8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DITestingFunctionApp.Tests", "DITestingFunctionApp.Tests\DITestingFunctionApp.Tests.csproj", "{020E202C-52D3-4000-BA5F-DBEA960AA4B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9183F58F-9DDA-485D-8E74-F82B4D4C3D8A} = {9183F58F-9DDA-485D-8E74-F82B4D4C3D8A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

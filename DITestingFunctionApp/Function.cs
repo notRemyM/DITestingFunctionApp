@@ -13,22 +13,19 @@ using System.Collections.Generic;
 
 namespace DITestingFunctionApp
 {
-    public class MainClass
+    public class DITestingFunction
     {
-        private readonly IAccountProvider _accountProvider;
         private readonly IAccountProcessor _accountProcessor;
-        public MainClass(IAccountProcessor accountProcessor, IAccountProvider accountProvider)
+        public DITestingFunction(IAccountProcessor accountProcessor)
         {
            _accountProcessor = accountProcessor;
-           _accountProvider = accountProvider;
         }
         [FunctionName("DITestingFunction")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
         {
-            List<Account> list = _accountProvider.GetAccounts();
-            int total = _accountProcessor.Process(list);
+            int total = _accountProcessor.Process();
 
-            var response = total.ToString();
+            var response = total;
             return new OkObjectResult(response);
         }
     }

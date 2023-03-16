@@ -9,6 +9,6 @@ namespace DITestingFunctionApp.Interfaces
 {
     public interface IAccountProcessor
     {
-        public int Process(List<Account> accounts);
+        public int Process();
     }
 }
